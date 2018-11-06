@@ -2,7 +2,7 @@
 
 namespace Shoppy\Product\Command\Value;
 
-use Shoppy\Product\Command\Entity\AbstractProduct;
+use Shoppy\Product\Command\Entity\ProductInterface;
 use Shoppy\Product\Command\Factory\ProductFactoryInterface;
 
 /**
@@ -12,24 +12,24 @@ use Shoppy\Product\Command\Factory\ProductFactoryInterface;
 abstract class AbstractShopManager
 {
     /**
-     * @var int
+     * @var string
      */
     private $managerId;
 
     /**
      * ShopManager constructor.
      *
-     * @param int $managerId
+     * @param string $managerId
      */
-    public function __construct(int $managerId)
+    public function __construct(string $managerId)
     {
         $this->managerId = $managerId;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function id(): int
+    public function id(): string
     {
         return $this->managerId;
     }
@@ -37,10 +37,9 @@ abstract class AbstractShopManager
     /**
      * @param NewProduct $product
      *
-     * @return AbstractProduct
-     * @throws \Exception
+     * @return ProductInterface
      */
-    public function createProduct(NewProduct $product): AbstractProduct
+    public function createProduct(NewProduct $product): ProductInterface
     {
         $product = $this->getProductFactory()->createFromNewProduct($product);
         $product->assignManager($this);
@@ -49,11 +48,11 @@ abstract class AbstractShopManager
     }
 
     /**
-     * @param AbstractProduct $product
+     * @param ProductInterface $product
      *
      * @return ProductDeleted
      */
-    public function deleteProduct(AbstractProduct $product): ProductDeleted
+    public function deleteProduct(ProductInterface $product): ProductDeleted
     {
         return new ProductDeleted($this->id(), $product->id());
     }

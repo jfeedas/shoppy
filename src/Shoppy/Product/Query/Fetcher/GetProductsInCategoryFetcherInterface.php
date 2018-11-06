@@ -9,9 +9,9 @@ namespace Shoppy\Product\Query\Fetcher;
 interface GetProductsInCategoryFetcherInterface
 {
     /**
-     * @param int $categoryId
+     * @param string $categoryId
      *
      * @return array
      */
-    public function get(int $categoryId): array;
+    public function get(string $categoryId): array;
 }

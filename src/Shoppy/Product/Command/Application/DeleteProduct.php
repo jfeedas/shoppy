@@ -28,13 +28,13 @@ abstract class DeleteProduct
     }
 
     /**
-     * @param int $managerId
-     * @param int $productId
+     * @param string $managerId
+     * @param string $productId
      *
      * @return bool
      * @throws ProductNotFoundException
      */
-    public function delete(int $managerId, int $productId): bool
+    public function delete(string $managerId, string $productId): bool
     {
         $product = $this->productRepository->getById($productId);
         if ($product === null) {
@@ -48,9 +48,9 @@ abstract class DeleteProduct
     }
 
     /**
-     * @param int $managerId
+     * @param string $managerId
      *
      * @return AbstractShopManager
      */
-    abstract protected function getManager(int $managerId): AbstractShopManager;
+    abstract protected function getManager(string $managerId): AbstractShopManager;
 }

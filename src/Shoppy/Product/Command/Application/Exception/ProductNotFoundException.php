@@ -11,9 +11,9 @@ class ProductNotFoundException extends \Exception
     /**
      * ProductNotFoundException constructor.
      *
-     * @param int $productId
+     * @param string $productId
      */
-    public function __construct(int $productId)
+    public function __construct(string $productId)
     {
         parent::__construct('Product ID: ' . $productId);
     }

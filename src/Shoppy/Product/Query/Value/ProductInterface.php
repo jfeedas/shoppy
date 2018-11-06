@@ -9,9 +9,9 @@ namespace Shoppy\Product\Query\Value;
 interface ProductInterface
 {
     /**
-     * @return int
+     * @return string
      */
-    public function id(): int;
+    public function id(): string;
 
     /**
      * @return Title

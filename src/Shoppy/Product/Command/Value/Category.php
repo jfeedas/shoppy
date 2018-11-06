@@ -9,24 +9,24 @@ namespace Shoppy\Product\Command\Value;
 class Category
 {
     /**
-     * @var int
+     * @var string
      */
     private $categoryId;
 
     /**
      * Category constructor.
      *
-     * @param int $categoryId
+     * @param string $categoryId
      */
-    public function __construct(int $categoryId)
+    public function __construct(string $categoryId)
     {
         $this->categoryId = $categoryId;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function id(): int
+    public function id(): string
     {
         return $this->categoryId;
     }

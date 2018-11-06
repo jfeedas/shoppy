@@ -2,7 +2,7 @@
 
 namespace Shoppy\Product\Command\Factory;
 
-use Shoppy\Product\Command\Entity\AbstractProduct;
+use Shoppy\Product\Command\Entity\ProductInterface;
 use Shoppy\Product\Command\Value\NewProduct;
 
 /**
@@ -14,14 +14,14 @@ interface ProductFactoryInterface
     /**
      * @param array $data
      *
-     * @return AbstractProduct
+     * @return ProductInterface
      */
-    public function buildFromArray(array $data): AbstractProduct;
+    public function buildFromArray(array $data): ProductInterface;
 
     /**
      * @param NewProduct $newProduct
      *
-     * @return AbstractProduct
+     * @return ProductInterface
      */
-    public function createFromNewProduct(NewProduct $newProduct): AbstractProduct;
+    public function createFromNewProduct(NewProduct $newProduct): ProductInterface;
 }

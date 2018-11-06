@@ -18,7 +18,7 @@ abstract class AddAttribute
     private $productRepository;
 
     /**
-     * AddAtrribute constructor.
+     * AddAttribute constructor.
      *
      * @param ProductRepositoryInterface $productRepository
      */
@@ -28,14 +28,14 @@ abstract class AddAttribute
     }
 
     /**
-     * @param int $productId
+     * @param string $productId
      * @param string $attributeName
      * @param string $attributeValue
      *
      * @return bool
      * @throws ProductNotFoundException
      */
-    public function addAttribute(int $productId, string $attributeName, string $attributeValue): bool
+    public function addAttribute(string $productId, string $attributeName, string $attributeValue): bool
     {
         $product = $this->productRepository->getById($productId);
         if ($product === null) {

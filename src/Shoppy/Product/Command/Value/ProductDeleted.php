@@ -2,46 +2,46 @@
 
 namespace Shoppy\Product\Command\Value;
 
-/*
- *
+/**
+ * Class ProductDeleted
+ * @package Shoppy\Product\Command\Value
  */
-
 class ProductDeleted
 {
     /**
-     * @var int
+     * @var string
      */
     private $managerId;
 
     /**
-     * @var int
+     * @var string
      */
     private $productId;
 
     /**
      * ProductDeleted constructor.
      *
-     * @param int $managerId
-     * @param int $productId
+     * @param string $managerId
+     * @param string $productId
      */
-    public function __construct(int $managerId, int $productId)
+    public function __construct(string $managerId, string $productId)
     {
         $this->managerId = $managerId;
         $this->productId = $productId;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getManagerId(): int
+    public function getManagerId(): string
     {
         return $this->managerId;
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getProductId(): int
+    public function getProductId(): string
     {
         return $this->productId;
     }

@@ -2,8 +2,8 @@
 
 namespace Shoppy\Product\Query\Application;
 
-use Implementation\Product\Query\Repository\ProductRepository;
 use Shoppy\Product\Query\Fetcher\GetProductsInCategoryFetcherInterface;
+use Shoppy\Product\Query\Repository\ProductRepositoryInterface;
 use Shoppy\Product\Query\Value\ProductInterface;
 
 /**
@@ -18,7 +18,7 @@ class GetProductsInCategory
     private $getProductsInCategoryFetcher;
 
     /**
-     * @var ProductRepository
+     * @var ProductRepositoryInterface
      */
     private $productRepository;
 
@@ -26,22 +26,22 @@ class GetProductsInCategory
      * GetProductsInCategory constructor.
      *
      * @param GetProductsInCategoryFetcherInterface $getProductsInCategoryFetcher
-     * @param ProductRepository $productRepository
+     * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
         GetProductsInCategoryFetcherInterface $getProductsInCategoryFetcher,
-        ProductRepository $productRepository
+        ProductRepositoryInterface $productRepository
     ) {
         $this->getProductsInCategoryFetcher = $getProductsInCategoryFetcher;
         $this->productRepository = $productRepository;
     }
 
     /**
-     * @param int $categoryId
+     * @param string $categoryId
      *
      * @return array|ProductInterface[]
      */
-    public function get(int $categoryId): array
+    public function get(string $categoryId): array
     {
         $ids = $this->getProductsInCategoryFetcher->get($categoryId);
         return $this->productRepository->getByIds($ids);

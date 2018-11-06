@@ -2,7 +2,7 @@
 
 namespace Shoppy\Product\Command\Repository;
 
-use Shoppy\Product\Command\Entity\AbstractProduct;
+use Shoppy\Product\Command\Entity\ProductInterface;
 
 /**
  * Interface ProductRepositoryInterface
@@ -11,23 +11,23 @@ use Shoppy\Product\Command\Entity\AbstractProduct;
 interface ProductRepositoryInterface
 {
     /**
-     * @param AbstractProduct $product
+     * @param ProductInterface $product
      *
      * @return bool
      */
-    public function persist(AbstractProduct $product): bool;
+    public function persist(ProductInterface $product): bool;
 
     /**
-     * @param int $id
+     * @param string $id
      *
-     * @return AbstractProduct
+     * @return ProductInterface
      */
-    public function getById(int $id): ?AbstractProduct;
+    public function getById(string $id): ?ProductInterface;
 
     /**
-     * @param AbstractProduct $product
+     * @param ProductInterface $product
      *
      * @return bool
      */
-    public function delete(AbstractProduct $product): bool;
+    public function delete(ProductInterface $product): bool;
 }

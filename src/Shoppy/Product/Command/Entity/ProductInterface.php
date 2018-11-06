@@ -32,4 +32,9 @@ interface ProductInterface
      * @return bool
      */
     public function assignToCategory(Category $category): bool;
+
+    /**
+     * @return string
+     */
+    public function id(): string;
 }

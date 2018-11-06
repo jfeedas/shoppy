@@ -29,18 +29,17 @@ abstract class CreateProduct
     }
 
     /**
-     * @param int $managerId
-     * @param int $categoryId
+     * @param string $managerId
+     * @param string $categoryId
      * @param string $title
      * @param string $description
      * @param int $price
      *
      * @return int
-     * @throws \Exception
      */
     public function create(
-        int $managerId,
-        int $categoryId,
+        string $managerId,
+        string $categoryId,
         string $title,
         string $description,
         int $price
@@ -57,9 +56,9 @@ abstract class CreateProduct
     }
 
     /**
-     * @param int $managerId
+     * @param string $managerId
      *
      * @return AbstractShopManager
      */
-    abstract protected function buildShopManager(int $managerId): AbstractShopManager;
+    abstract protected function buildShopManager(string $managerId): AbstractShopManager;
 }
