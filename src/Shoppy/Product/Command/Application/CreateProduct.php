@@ -35,7 +35,7 @@ abstract class CreateProduct
      * @param string $description
      * @param int $price
      *
-     * @return int
+     * @return string
      */
     public function create(
         string $managerId,
@@ -43,7 +43,7 @@ abstract class CreateProduct
         string $title,
         string $description,
         int $price
-    ): int {
+    ): string {
         $category = new Category($categoryId);
         $shopManager = $this->buildShopManager($managerId);
         $newProduct = new NewProduct($title, $description, $price);
