@@ -10,7 +10,7 @@ use Shoppy\Product\Command\Value\Attribute;
  * Class AddAttribute
  * @package Shoppy\Product\Command\Application
  */
-abstract class AddAttribute
+class AddAttribute
 {
     /**
      * @var ProductRepositoryInterface

@@ -2,16 +2,16 @@
 
 namespace Shoppy\Product\Command\Application;
 
+use Shoppy\Product\Command\Repository\CategoryRepositoryInterface;
 use Shoppy\Product\Command\Repository\ProductRepositoryInterface;
-use Shoppy\Product\Command\Value\AbstractShopManager;
-use Shoppy\Product\Command\Value\Category;
+use Shoppy\Product\Command\Repository\ShopManagerRepositoryInterface;
 use Shoppy\Product\Command\Value\NewProduct;
 
 /**
  * Class CreateProduct
  * @package Shoppy\Product\Command\Application
  */
-abstract class CreateProduct
+class CreateProduct
 {
     /**
      * @var ProductRepositoryInterface
@@ -19,13 +19,30 @@ abstract class CreateProduct
     private $productRepository;
 
     /**
+     * @var ShopManagerRepositoryInterface
+     */
+    private $shopManagerRepository;
+
+    /**
+     * @var CategoryRepositoryInterface
+     */
+    private $categoryRepository;
+
+    /**
      * CreateProduct constructor.
      *
      * @param ProductRepositoryInterface $productRepository
+     * @param ShopManagerRepositoryInterface $shopManagerRepository
+     * @param CategoryRepositoryInterface $categoryRepository
      */
-    public function __construct(ProductRepositoryInterface $productRepository)
-    {
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        ShopManagerRepositoryInterface $shopManagerRepository,
+        CategoryRepositoryInterface $categoryRepository
+    ) {
         $this->productRepository = $productRepository;
+        $this->shopManagerRepository = $shopManagerRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     /**
@@ -44,8 +61,8 @@ abstract class CreateProduct
         string $description,
         int $price
     ): string {
-        $category = new Category($categoryId);
-        $shopManager = $this->buildShopManager($managerId);
+        $category = $this->categoryRepository->getById($categoryId);
+        $shopManager = $this->shopManagerRepository->getById($managerId);
         $newProduct = new NewProduct($title, $description, $price);
 
         $product = $shopManager->createProduct($newProduct);
@@ -54,11 +71,4 @@ abstract class CreateProduct
         $this->productRepository->persist($product);
         return $product->id();
     }
-
-    /**
-     * @param string $managerId
-     *
-     * @return AbstractShopManager
-     */
-    abstract protected function buildShopManager(string $managerId): AbstractShopManager;
 }

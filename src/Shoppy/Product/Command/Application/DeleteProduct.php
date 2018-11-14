@@ -4,13 +4,13 @@ namespace Shoppy\Product\Command\Application;
 
 use Shoppy\Product\Command\Application\Exception\ProductNotFoundException;
 use Shoppy\Product\Command\Repository\ProductRepositoryInterface;
-use Shoppy\Product\Command\Value\AbstractShopManager;
+use Shoppy\Product\Command\Repository\ShopManagerRepositoryInterface;
 
 /**
  * Class DeleteProduct
  * @package Shoppy\Product\Command\Application
  */
-abstract class DeleteProduct
+class DeleteProduct
 {
     /**
      * @var ProductRepositoryInterface
@@ -18,13 +18,22 @@ abstract class DeleteProduct
     private $productRepository;
 
     /**
+     * @var ShopManagerRepositoryInterface
+     */
+    private $shopManagerRepository;
+
+    /**
      * DeleteProduct constructor.
      *
      * @param ProductRepositoryInterface $productRepository
+     * @param ShopManagerRepositoryInterface $shopManagerRepository
      */
-    public function __construct(ProductRepositoryInterface $productRepository)
-    {
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        ShopManagerRepositoryInterface $shopManagerRepository
+    ) {
         $this->productRepository = $productRepository;
+        $this->shopManagerRepository = $shopManagerRepository;
     }
 
     /**
@@ -41,16 +50,8 @@ abstract class DeleteProduct
             throw new ProductNotFoundException($productId);
         }
 
-        $manager = $this->getManager($managerId);
-        $productDeleted = $manager->deleteProduct($product);
-
+        $manager = $this->shopManagerRepository->getById($managerId);
+        $manager->deleteProduct($product);
         return $this->productRepository->delete($product);
     }
-
-    /**
-     * @param string $managerId
-     *
-     * @return AbstractShopManager
-     */
-    abstract protected function getManager(string $managerId): AbstractShopManager;
 }

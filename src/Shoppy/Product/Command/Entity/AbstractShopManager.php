@@ -1,38 +1,20 @@
 <?php
 
-namespace Shoppy\Product\Command\Value;
+namespace Shoppy\Product\Command\Entity;
 
-use Shoppy\Product\Command\Entity\ProductInterface;
 use Shoppy\Product\Command\Factory\ProductFactoryInterface;
+use Shoppy\Product\Command\Value\NewProduct;
 
 /**
- * Class ShopManager
- * @package Shoppy\Product\Command
+ * Class AbstractShopManager
+ * @package Shoppy\Product\Command\Entity
  */
 abstract class AbstractShopManager
 {
     /**
-     * @var string
-     */
-    private $managerId;
-
-    /**
-     * ShopManager constructor.
-     *
-     * @param string $managerId
-     */
-    public function __construct(string $managerId)
-    {
-        $this->managerId = $managerId;
-    }
-
-    /**
      * @return string
      */
-    public function id(): string
-    {
-        return $this->managerId;
-    }
+    abstract public function id(): string;
 
     /**
      * @param NewProduct $product
@@ -43,19 +25,28 @@ abstract class AbstractShopManager
     {
         $product = $this->getProductFactory()->createFromNewProduct($product);
         $product->assignManager($this);
+        $this->onProductCreate($product);
 
         return $product;
     }
 
     /**
      * @param ProductInterface $product
-     *
-     * @return ProductDeleted
      */
-    public function deleteProduct(ProductInterface $product): ProductDeleted
+    public function deleteProduct(ProductInterface $product): void
     {
-        return new ProductDeleted($this->id(), $product->id());
+        $this->onProductCreate($product);
     }
+
+    /**
+     * @param ProductInterface $product
+     */
+    abstract protected function onProductCreate(ProductInterface $product): void;
+
+    /**
+     * @param ProductInterface $product
+     */
+    abstract public function onDeleteProduct(ProductInterface $product): void;
 
     /**
      * @return ProductFactoryInterface

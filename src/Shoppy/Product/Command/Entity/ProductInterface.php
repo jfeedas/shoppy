@@ -2,9 +2,7 @@
 
 namespace Shoppy\Product\Command\Entity;
 
-use Shoppy\Product\Command\Value\AbstractShopManager;
 use Shoppy\Product\Command\Value\Attribute;
-use Shoppy\Product\Command\Value\Category;
 
 /**
  * Interface ProductInterface
@@ -27,11 +25,11 @@ interface ProductInterface
     public function addAttribute(Attribute $attribute): bool;
 
     /**
-     * @param Category $category
+     * @param CategoryInterface $category
      *
      * @return bool
      */
-    public function assignToCategory(Category $category): bool;
+    public function assignToCategory(CategoryInterface $category): bool;
 
     /**
      * @return string
