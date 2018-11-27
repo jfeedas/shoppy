@@ -3,7 +3,10 @@
 namespace Shoppy\Product\Command\Domain\Service;
 
 use Shoppy\Product\Command\Domain\Product;
+use Shoppy\Product\Command\Domain\ProductDescription;
 use Shoppy\Product\Command\Domain\ProductFactory;
+use Shoppy\Product\Command\Domain\ProductPrice;
+use Shoppy\Product\Command\Domain\ProductTitle;
 
 /**
  * Class ProductCreator
@@ -27,11 +30,15 @@ class ProductCreator
     }
 
     /**
+     * @param ProductTitle $title
+     * @param ProductDescription $description
+     * @param ProductPrice $price
+     *
      * @return Product
      */
-    public function create(): Product
+    public function create(ProductTitle $title, ProductDescription $description, ProductPrice $price): Product
     {
-        $product = $this->productFactory->buildNew();
+        $product = $this->productFactory->buildNew($title, $description, $price);
         return $product;
     }
 }
