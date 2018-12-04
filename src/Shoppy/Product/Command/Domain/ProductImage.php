@@ -3,9 +3,9 @@
 namespace Shoppy\Product\Command\Domain;
 
 /**
- * Class ProductImage
+ * Interface ProductImage
  * @package Shoppy\Product\Command\Domain
  */
-class ProductImage
+interface ProductImage
 {
 }

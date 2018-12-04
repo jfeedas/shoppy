@@ -3,10 +3,7 @@
 namespace Shoppy\Product\Command\Application\CreateProduct;
 
 use Shoppy\Product\Command\Domain\Event\ProductCreated;
-use Shoppy\Product\Command\Domain\ProductDescription;
-use Shoppy\Product\Command\Domain\ProductPrice;
 use Shoppy\Product\Command\Domain\ProductRepository;
-use Shoppy\Product\Command\Domain\ProductTitle;
 use Shoppy\Product\Command\Domain\Service\ProductCreator;
 
 /**
@@ -46,13 +43,14 @@ class CreateProductCommandHandler
      */
     public function execute(CreateProductCommand $command): array
     {
-        $title = new ProductTitle($command->getTitle());
-        $description = new ProductDescription($command->getDescription());
-        $price = new ProductPrice($command->getPrice());
+        $product = $this->productCreator->create(
+            $command->title(),
+            $command->description(),
+            $command->price(),
+            $command->mainImage()
+        );
 
-        $product = $this->productCreator->create($title, $description, $price);
         $this->productRepository->save($product);
-
         return [new ProductCreated($product->id())];
     }
 }

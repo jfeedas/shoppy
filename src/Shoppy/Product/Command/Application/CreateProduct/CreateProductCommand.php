@@ -2,6 +2,11 @@
 
 namespace Shoppy\Product\Command\Application\CreateProduct;
 
+use Shoppy\Product\Command\Domain\ProductDescription;
+use Shoppy\Product\Command\Domain\ProductImage;
+use Shoppy\Product\Command\Domain\ProductPrice;
+use Shoppy\Product\Command\Domain\ProductTitle;
+
 /**
  * Interface CreateProductCommand
  * @package Shoppy\Product\Command\Application\CreateProduct
@@ -9,17 +14,22 @@ namespace Shoppy\Product\Command\Application\CreateProduct;
 interface CreateProductCommand
 {
     /**
-     * @return string
+     * @return ProductTitle
      */
-    public function getTitle(): string;
+    public function title(): ProductTitle;
 
     /**
-     * @return string
+     * @return ProductDescription|null
      */
-    public function getDescription(): string;
+    public function description(): ?ProductDescription;
 
     /**
-     * @return int
+     * @return ProductPrice|null
      */
-    public function getPrice(): int;
+    public function price(): ?ProductPrice;
+
+    /**
+     * @return ProductImage|null
+     */
+    public function mainImage(): ?ProductImage;
 }

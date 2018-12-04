@@ -10,10 +10,16 @@ interface ProductFactory
 {
     /**
      * @param ProductTitle $title
-     * @param ProductDescription $description
-     * @param ProductPrice $price
+     * @param ProductDescription|null $description
+     * @param ProductPrice|null $price
+     * @param ProductImage|null $mainImage
      *
      * @return Product
      */
-    public function buildNew(ProductTitle $title, ProductDescription $description, ProductPrice $price): Product;
+    public function buildNew(
+        ProductTitle $title,
+        ?ProductDescription $description,
+        ?ProductPrice $price,
+        ?ProductImage $mainImage
+    ): Product;
 }
